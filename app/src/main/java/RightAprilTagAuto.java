@@ -296,7 +296,7 @@ public class RightAprilTagAuto extends LinearOpMode
             LeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             //LeftBack is only ever paired with the front two motors, so we only need to check for positives and negatives for those two.
-            while(LeftBackSet.isBusy) {
+            while(LeftBackSet.isBusy()) {
                 if (LeftBackSet == RightFront) {
                     if (RightFrontInches > 0) {
                         LeftBack.setPower(0.2);
