@@ -235,23 +235,23 @@ public class RightAprilTagAuto extends LinearOpMode
         }
 
         /* Actually do something useful */
-        encoderDrive(0.2, -4, -4, 4, RightFront, 0.2);
+        encoderDrive(0.2, 4, 4, -4, RightFront, 0.2);
         Lift.setPower(0.3);
         encoderDrive(0.2, 10, 10, 10, RightFront, 0.2);
-        encoderDrive(0.2, 4, 0, 0, LeftFront, 0.2);
+        encoderDrive(0.2, 0, 4, 4, LeftFront, 0.2);
         RightServo.setPosition(1);
         LeftServo.setPosition(1);
         Lift.setPower(-0.2);
         if(TagIdentified == "Left"){
-            encoderDrive(0.2, -4, -4, -4, RightFront, 0.2);
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
             encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
         }
         if(TagIdentified == "Center"){
-            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
             encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
         }
         if(TagIdentified == "Right"){
-            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, -6, -6, -6, LeftFront, 0.2);
             encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
         }
 
