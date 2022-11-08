@@ -233,25 +233,32 @@ public class RedCircuitBuildLiftEncoder extends LinearOpMode
             telemetry.update();
         }
         //push cone to taped area
+        //mecanum 0.8 tiles
         encoderDrive(0.2, 7, 7, -7, RightFront,5, 0.2);
         //go to stack
+        // straight two tiles
         encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        //turn 90*
         encoderDrive(0.2, -5, 0, 0, LeftFront, 0,0.2);
+        //straight 0.7 tiles
         encoderDrive(0.2, 2, 2, 2, RightFront, 0,0.2);
         //grab cone off stack
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //lift for low terminal
         encoderDrive(0.2, 0, 0, 0, LeftFront, 12,0.2);
+        //straight two tiles
         encoderDrive(0.2, -12, -12, -12, LeftFront, 0,0.2);
         //sideways to terminal, no turn as to conserve time while still being consistent. Turns = bad
+        //mecanum 1.6 yiles
         encoderDrive(0.2, 10, 10, -10, RightFront, 0,0.2);
         //drop cone
         RightServo.setPosition(1);
         LeftServo.setPosition(1);
         //First cone stacked, going for second
-
+        //mecanum 1.6 tiles
         encoderDrive(0.2, -10, -10, 10, RightFront, 0,0.2);
+        //straight two tiles
         encoderDrive(0.2, 12, 12, 12, LeftFront, -12, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
@@ -259,20 +266,26 @@ public class RedCircuitBuildLiftEncoder extends LinearOpMode
         //added to allow robot to lift the lift as to not tip stack.
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
         //go to far, high junction for shortest circuit
+        //straight 3 tiles
         encoderDrive(0.2, -12, -12, -12, LeftFront, 0, 0.2;
+        //mecanum 0.5 tiles
         encoderDrive(0.2, 4, 4, -4, RightFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone dropped
+        //mecanum 0.5 tiles
         encoderDrive(0.2,  -4, -4, 4, RightFront,  0.2);
 
         //parking based on April Tag detection.
+        //straight 1 tiles
         if(TagIdentified == "Right"){
             encoderDrive(0.2, 6, 6, 6, LeftFront, 0.2);
         }
+        //straight two tiles
         if(TagIdentified == "Center"){
             encoderDrive(0.2, 12, 12, 12, LeftFront, 0.2);
         }
+        //straight 3 tiles
         if(TagIdentified == "Left"){
             encoderDrive(0.2, 15, 15, 15, LeftFront, 0.2);
         }
