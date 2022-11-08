@@ -295,13 +295,30 @@ public class LeftAprilTagAuto extends LinearOpMode
             RightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             LeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            while(LeftBackSet.isBusy){
-                LeftBack.setPower(0.2);
-            }
-            while (!LeftBackSet.isBusy) {
-                LeftBack.setPower(0);
-            }
+            //LeftBack is only ever paired with the front two motors, so we only need to check for positives and negatives for those two.
+            while(LeftBackSet.isBusy) {
+                if (LeftBackSet == RightFront) {
+                    if (RightFrontInches > 0) {
+                        LeftBack.setPower(0.2);
+                    }
+                } else if(RightFrontInches < 0){
+                    LeftBack.setPower(-.2);
 
+                } else {
+                    LeftBack.setPower(0);
+                }
+
+                if (LeftBackSet == LeftFront) {
+                    if (LeftFrontInches > 0) {
+                        LeftBack.setPower(0.2);
+                    }
+                } else if (LeftFrontInches < 0) {
+                    LeftBack.setPower(-.2);
+
+                } else {
+                    LeftBack.setPower(0);
+                }
+            }
 
             runtime.reset();
             RightBack.setPower(Math.abs(speed));
