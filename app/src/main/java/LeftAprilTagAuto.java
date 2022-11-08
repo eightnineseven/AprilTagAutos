@@ -235,33 +235,26 @@ public class LeftAprilTagAuto extends LinearOpMode
         }
 
         /* Actually do something useful */
-        if(tagOfInterest == null)
-        {
-            /*
-             * Insert your autonomous code here, presumably running some default configuration
-             * since the tag was never sighted during INIT
-             */
+        encoderDrive(0.2, -4, -4, 4, RightFront, 0.2);
+        Lift.setPower(0.3);
+        encoderDrive(0.2, 10, 10, 10, RightFront, 0.2);
+        encoderDrive(0.2, 4, 0, 0, LeftFront, 0.2);
+        RightServo.setPosition(1);
+        LeftServo.setPosition(1);
+        Lift.setPower(-0.2);
+        if(TagIdentified == "Left"){
+            encoderDrive(0.2, -4, -4, -4, RightFront, 0.2);
+            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
         }
-        else
-        {
-            /*
-             * Insert your autonomous code here, probably using the tag pose to decide your configuration.
-             */
+        if(TagIdentified == "Center"){
+            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
+        }
+        if(TagIdentified == "Right"){
+            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
+        }
 
-            // e.g.
-            if(tagOfInterest.pose.x <= 20)
-            {
-                // do something
-            }
-            else if(tagOfInterest.pose.x >= 20 && tagOfInterest.pose.x <= 50)
-            {
-                // do something else
-            }
-            else if(tagOfInterest.pose.x >= 50)
-            {
-                // do something else
-            }
-        }
 
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
@@ -278,9 +271,7 @@ public class LeftAprilTagAuto extends LinearOpMode
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
-    //Starting Auto
-    waitForStart();
-    encoderDrive(0.2, -4, -4, 4, RightFront, 0.2);
+
 
 
     public void encoderDrive(double speed,  double LeftFrontInches, double RightBackInches, double RightFrontInches, String LeftBackSet, double timeoutS) {
