@@ -39,7 +39,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.ArrayList;
 //@Disabled
 @Autonomous
-public class LeftAprilTagAutoWithLiftEncoder extends LinearOpMode
+public class RightAprilTagAutoWithLiftEncoder extends LinearOpMode
 {
     //April Tag Declarations
     OpenCvCamera camera;
@@ -233,14 +233,14 @@ public class LeftAprilTagAutoWithLiftEncoder extends LinearOpMode
             telemetry.update();
         }
 
-        encoderDrive(0.2, -4, -4, 4, RightFront,30, 0.2);
+        encoderDrive(0.2, -4, 4, -4, RightFront,30, 0.2);
         encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
-        encoderDrive(0.2, 4, 0, 0, LeftFront, 0,0.2);
+        encoderDrive(0.2, -4, 4, 4, LeftFront, 0,0.2);
         RightServo.setPosition(1);
         LeftServo.setPosition(1);
         //First cone stacked, going for second
 
-        encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
         encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
@@ -248,36 +248,36 @@ public class LeftAprilTagAutoWithLiftEncoder extends LinearOpMode
         //added to allow robot to lift the lift as to not tip stack.
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
-        encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
+        encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone dropped
 
         //Second cone stacked, stacking third
-        encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
-        encoderDrive(0.2, 8, 8, 8, LeftFront, 3.6, 0.2);
+        encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone grabbed
         //added to allow robot to lift the lift as to not tip stack.
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
-        encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
+        encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone dropped
 
         //parking based on April Tag detection.
         if(TagIdentified == "Left"){
-            encoderDrive(0.2, -4, -4, -4, RightFront,-30, 0.2);
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
             encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
         }
         if(TagIdentified == "Center"){
-            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
             encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
         }
         if(TagIdentified == "Right"){
-            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, -6, -6, -6, LeftFront, 0.2);
             encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
         }
 
