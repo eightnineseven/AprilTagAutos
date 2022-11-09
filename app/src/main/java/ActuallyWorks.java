@@ -1,4 +1,4 @@
-*
+/*
         * Copyright (c) 2021 OpenFTC Team
         *
         * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -45,6 +45,8 @@ import java.util.ArrayList;
 @Autonomous
 public class ActuallyWorks extends LinearOpMode
 {
+    private DcMotor         LeftBack = null;
+    private DcMotor         RightBack = null;
     private DcMotor         LeftFront  = null;
     private DcMotor         RightFront = null;
     private DcMotor         Lift = null;
@@ -80,7 +82,7 @@ public class ActuallyWorks extends LinearOpMode
     int ID_TAG_17 = 17;
     int ID_TAG_19 = 19;
 
-    int TagIdentified = 18;
+    String TagIdentified = "Center";
 
     AprilTagDetection tagOfInterest = null;
 
@@ -89,6 +91,8 @@ public class ActuallyWorks extends LinearOpMode
 
         LeftFront = hardwareMap.get(DcMotor.class, "LeftFront");
         RightFront = hardwareMap.get(DcMotor.class, "RightFront");
+        LeftBack = hardwareMap.get(DcMotor.class, "LeftBack");
+        RightBack = hardwareMap.get(DcMotor.class, "RightBack");
 
         Lift = hardwareMap.get(DcMotor.class, "Lift");
         RightServo = hardwareMap.get(Servo.class, "ClawRight");
@@ -96,16 +100,22 @@ public class ActuallyWorks extends LinearOpMode
 
         RightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         LeftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        RightBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        LeftBack.setDirection(DcMotorSimple.Direction.FORWARD);
 
         LeftServo.setDirection(Servo.Direction.FORWARD); // Left side looking from back
         RightServo.setDirection(Servo.Direction.REVERSE);
 
         LeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LeftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LeftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
@@ -143,19 +153,19 @@ public class ActuallyWorks extends LinearOpMode
                     if (tag.id == ID_TAG_18) {
                         tagOfInterest = tag;
                         tagFound = true;
-                        TagIdentified = 18;
+                        TagIdentified = "Center";
                         break;
                     } else if (tag.id == ID_TAG_19) {
                         tagOfInterest = tag;
-                        TagIdentified = 19;
+                        TagIdentified = "Right";
                         tagFound = true;
                         break;
                     } else if (tag.id == ID_TAG_17) {
                         tagOfInterest = tag;
-                        TagIdentified = 17;
+                        TagIdentified = "Left";
                         tagFound = true;
                         break;
-                        //17=Left   18=Middle    19=
+                        //17=Left   18=Middle    19=Right
                     }
 
                 }
@@ -271,27 +281,36 @@ public class ActuallyWorks extends LinearOpMode
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
-    public void encoderDrive(double speed,  double LeftFrontInches, double RightFrontInches,double timeoutS) {
+    public void encoderDrive(double speed,  double LeftFrontInches, double RightBackInches, double RightFrontInches, double LiftSet, double timeoutS) {
+        int newRightBackTarget;
         int newLeftFrontTarget;
         int newRightFrontTarget;
-
+        int newLiftSet;
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
             // Determine new target position, and pass to motor controller
 
             newLeftFrontTarget = (int) ((double) LeftFront.getCurrentPosition() / COUNTS_PER_INCH + (int)(LeftFrontInches * COUNTS_PER_INCH));
             newRightFrontTarget = (int) ((double) RightFront.getCurrentPosition() / COUNTS_PER_INCH + (int)(RightFrontInches * COUNTS_PER_INCH));
+            newRightBackTarget = (int) ((double) RightBack.getCurrentPosition() / COUNTS_PER_INCH + (int)(RightBackInches * COUNTS_PER_INCH));
+            newLiftSet = (int) (COUNTS_PER_INCH * (int)(LiftSet));
             LeftFront.setTargetPosition(newLeftFrontTarget * 3);
             RightFront.setTargetPosition(newRightFrontTarget * 3);
+            RightBack.setTargetPosition(newRightBackTarget * 3);
+
 
             // Turn On RUN_TO_POSITION
             LeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            RightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
             runtime.reset();
             LeftFront.setPower(Math.abs(speed));
             RightFront.setPower(Math.abs(speed));
+            RightBack.setPower(Math.abs(speed);
+            Lift.setPower(Math.abs(speed));
 
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS)) {
@@ -303,10 +322,14 @@ public class ActuallyWorks extends LinearOpMode
             // Stop all motion;
             LeftFront.setPower(0);
             RightFront.setPower(0);
+            RightBack.setPower(0);
+            Lift.setPower(0);
 
             // Turn off RUN_TO_POSITION
             LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             sleep(250);   // optional pause after each move.
 

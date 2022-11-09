@@ -1,0 +1,256 @@
+Blue Circuit:
+//push cone to taped area
+        //mecanum 0.8 tiles
+        encoderDrive(0.2, -7, -7, 7, RightFront,5, 0.2);
+        //go to stack
+        //straight 2 tiles
+        encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        //turn 90*
+        encoderDrive(0.2, 0, -5, -5, RightFront, 0,0.2);
+        //straight 0.7 tiles
+        encoderDrive(0.2, 2, 2, 2, RightFront, 0,0.2);
+        //grab cone off stack
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //lift for low terminal
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 12,0.2);
+        //straight 2 tiles
+        encoderDrive(0.2, -12, -12, -12, LeftFront, 0,0.2);
+        //sideways to terminal, no turn as to conserve time while still being consistent. Turns = bad
+        //mecanum 1.6 tiles
+        encoderDrive(0.2, -10, -10, 10, RightFront, 0,0.2);
+        //drop cone
+        RightServo.setPosition(1);
+        LeftServo.setPosition(1);
+        //First cone stacked, going for second
+        //mecanum 1.6 tiles
+        encoderDrive(0.2, 10, 10, -10, RightFront, 0,0.2);
+        //straight 2 tiles
+        encoderDrive(0.2, 12, 12, 12, LeftFront, -12, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //go to far, high junction for shortest circuit
+        //straight 3 tiles
+        encoderDrive(0.2, -12, -12, -12, LeftFront, 0, 0.2;
+        //mecanum 0.5 tiles
+        encoderDrive(0.2, -4, -4, 4, RightFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+        //mecanum 0.5 tiles
+        encoderDrive(0.2, 4, 4, -4, RightFront,  0.2);
+
+        //parking based on April Tag detection.
+        //straight one tiles
+        if(TagIdentified == "Left"){
+            encoderDrive(0.2, 6, 6, 6, LeftFront, 0.2);
+        }
+        //straight two tiles
+        if(TagIdentified == "Center"){
+            encoderDrive(0.2, 12, 12, 12, LeftFront, 0.2);
+        }
+        //straight three tiles
+        if(TagIdentified == "Right"){
+            encoderDrive(0.2, 15, 15, 15, LeftFront, 0.2);
+        }
+
+Red Circuit
+//push cone to taped area
+        //mecanum 0.8 tiles
+        encoderDrive(0.2, 7, 7, -7, RightFront,5, 0.2);
+        //go to stack
+        // straight two tiles
+        encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        //turn 90*
+        encoderDrive(0.2, -5, 0, 0, LeftFront, 0,0.2);
+        //straight 0.7 tiles
+        encoderDrive(0.2, 2, 2, 2, RightFront, 0,0.2);
+        //grab cone off stack
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //lift for low terminal
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 12,0.2);
+        //straight two tiles
+        encoderDrive(0.2, -12, -12, -12, LeftFront, 0,0.2);
+        //sideways to terminal, no turn as to conserve time while still being consistent. Turns = bad
+        //mecanum 1.6 yiles
+        encoderDrive(0.2, 10, 10, -10, RightFront, 0,0.2);
+        //drop cone
+        RightServo.setPosition(1);
+        LeftServo.setPosition(1);
+        //First cone stacked, going for second
+        //mecanum 1.6 tiles
+        encoderDrive(0.2, -10, -10, 10, RightFront, 0,0.2);
+        //straight two tiles
+        encoderDrive(0.2, 12, 12, 12, LeftFront, -12, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //go to far, high junction for shortest circuit
+        //straight 3 tiles
+        encoderDrive(0.2, -12, -12, -12, LeftFront, 0, 0.2;
+        //mecanum 0.5 tiles
+        encoderDrive(0.2, 4, 4, -4, RightFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+        //mecanum 0.5 tiles
+        encoderDrive(0.2,  -4, -4, 4, RightFront,  0.2);
+
+        //parking based on April Tag detection.
+        //straight 1 tiles
+        if(TagIdentified == "Right"){
+            encoderDrive(0.2, 6, 6, 6, LeftFront, 0.2);
+        }
+        //straight two tiles
+        if(TagIdentified == "Center"){
+            encoderDrive(0.2, 12, 12, 12, LeftFront, 0.2);
+        }
+        //straight 3 tiles
+        if(TagIdentified == "Left"){
+            encoderDrive(0.2, 15, 15, 15, LeftFront, 0.2);
+        }
+
+Red With lift
+encoderDrive(0.2, -4, 4, -4, RightFront,30, 0.2);
+        encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        encoderDrive(0.2, -4, 4, 4, LeftFront, 0,0.2);
+        RightServo.setPosition(1);
+        LeftServo.setPosition(1);
+        //First cone stacked, going for second
+
+        encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+
+        //Second cone stacked, stacking third
+        encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+
+        //parking based on April Tag detection.
+        if(TagIdentified == "Left"){
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
+            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
+        }
+        if(TagIdentified == "Center"){
+            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
+            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
+        }
+        if(TagIdentified == "Right"){
+            encoderDrive(0.2, -6, -6, -6, LeftFront, 0.2);
+            encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
+        }
+Left with lift
+encoderDrive(0.2, -4, -4, 4, RightFront,30, 0.2);
+        encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        encoderDrive(0.2, 4, 0, 0, LeftFront, 0,0.2);
+        RightServo.setPosition(1);
+        LeftServo.setPosition(1);
+        //First cone stacked, going for second
+
+        encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+
+        //Second cone stacked, stacking third
+        encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
+        encoderDrive(0.2, 8, 8, 8, LeftFront, 3.6, 0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone grabbed
+        //added to allow robot to lift the lift as to not tip stack.
+        encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
+        RightServo.setPosition(0.85);
+        LeftServo.setPosition(0.85);
+        //cone dropped
+
+        //parking based on April Tag detection.
+        if(TagIdentified == "Left"){
+            encoderDrive(0.2, -4, -4, -4, RightFront,-30, 0.2);
+            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
+        }
+        if(TagIdentified == "Center"){
+            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
+        }
+        if(TagIdentified == "Right"){
+            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
+            encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
+        }
+Unit Test
+//Testing Lift max height in program
+        // max height = ___
+        encoderDrive(0.2, 0,0, 0, RightFront,30, 6);
+        //Testing one tile forward
+        //One tile (24in) =___
+        encoderDrive(0.2, 24, 24, 24, RightFront,30, 6);
+        //Testing inplace turn
+        // 360* = ___
+        encoderDrive(0.2, -10, 10, 10, LeftFront, 0,6);
+        //Testing oneside turn
+        //360* = ___
+        encoderDrive(0.2, 4, 0, 0, LeftFront, 0,6);
+        //Testing Mecanum one tile
+        //One tile (24in) = ___
+        encoderDrive(0.2, 24, 24, -24, RightFront, 0,6);
+
+
+While loop for LeftBack
+while(LeftBackSet.isBusy())) {
+                if (LeftBackSet == RightFront) {
+                    if (RightFrontInches > 0) {
+                        LeftBack.setPower(0.2);
+                    }
+                } else if(RightFrontInches < 0){
+                    LeftBack.setPower(-.2);
+
+                } else {
+                    LeftBack.setPower(0);
+                }
+
+                if (LeftBackSet == LeftFront) {
+                    if (LeftFrontInches > 0) {
+                        LeftBack.setPower(0.2);
+                    }
+                } else if (LeftFrontInches < 0) {
+                    LeftBack.setPower(-.2);
+
+                } else {
+                    LeftBack.setPower(0);
+                }
+            }
