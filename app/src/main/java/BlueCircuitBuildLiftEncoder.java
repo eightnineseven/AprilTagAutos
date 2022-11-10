@@ -255,12 +255,14 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             //turn 90*
             encoderDrive(0.2, 0, -5, -5,  0,0.2);
             while(RightFront.isBusy){
                 LeftBack.setPower(-0.2);
             }
             LeftBack.setPower(0);
+
 
             //straight 0.7 tiles
             encoderDrive(0.2, 2, 2, 2,  0,0.2);
@@ -269,13 +271,16 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             //grab cone off stack
             RightServo.setPosition(0.85);
             LeftServo.setPosition(0.85);
 
+
             //lift for low terminal
             encoderDrive(0.2, 0, 0, 0,  12,0.2);
             LeftBack.setPower(0);
+
 
             //straight 2 tiles
             encoderDrive(0.2, -12, -12, -12,  0,0.2);
@@ -283,6 +288,7 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
                 LeftBack.setPower(-0.2);
             }
             LeftBack.setPower(0);
+
 
             //sideways to terminal, no turn as to conserve time while still being consistent. Turns = bad
             //mecanum 1.6 tiles
@@ -292,9 +298,11 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             //drop cone
             RightServo.setPosition(1);
             LeftServo.setPosition(1);
+
 
             //First cone stacked, going for second
             //mecanum 1.6 tiles
@@ -304,6 +312,7 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             //straight 2 tiles
             encoderDrive(0.2, 12, 12, 12,  -12, 0.2);
             while(LeftFront.isBusy){
@@ -311,13 +320,16 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             RightServo.setPosition(0.85);
             LeftServo.setPosition(0.85);
+
 
             //cone grabbed
             //added to allow robot to lift the lift as to not tip stack.
             encoderDrive(0.2, 0, 0, 0,  30, 0.2);
             LeftBack.setPower(0);
+
 
             //go to far, high junction for shortest circuit
             //straight 3 tiles
@@ -327,6 +339,7 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             //mecanum 0.5 tiles
             encoderDrive(0.2, -4, -4, 4, 0,  0.2);
             while(RightFront.isBusy){
@@ -334,9 +347,11 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
             }
             LeftBack.setPower(0);
 
+
             RightServo.setPosition(0.85);
             LeftServo.setPosition(0.85);
             //cone dropped
+
 
             //mecanum 0.5 tiles
             encoderDrive(0.2, 4, 4, -4, 0,  0.2);
@@ -344,6 +359,7 @@ public class BlueCircuitBuildLiftEncoder extends LinearOpMode
                 LeftBack.setPower(-0.2);
             }
             LeftBack.setPower(0);
+
 
             //parking based on April Tag detection.
             //straight one tiles

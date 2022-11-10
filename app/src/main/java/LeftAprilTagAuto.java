@@ -40,6 +40,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.ArrayList;
 
 @Autonomous
+@Disabled
 public class LeftAprilTagAuto extends LinearOpMode
 {
     //April Tag Declarations

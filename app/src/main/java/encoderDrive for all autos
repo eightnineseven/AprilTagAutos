@@ -116,36 +116,55 @@ Red Circuit
             encoderDrive(0.2, 15, 15, 15, LeftFront, 0.2);
         }
 
-Red With lift
+Right With lift
+
+//lift to max
+//mecanum 0.3
 encoderDrive(0.2, -4, 4, -4, RightFront,30, 0.2);
+//straight 2.5 tiles
         encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
+        //90* turn
         encoderDrive(0.2, -4, 4, 4, LeftFront, 0,0.2);
         RightServo.setPosition(1);
         LeftServo.setPosition(1);
         //First cone stacked, going for second
-
-        encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
+        //lift all the way down
+        //180* turn
+        encoderDrive(0.2, -4, 4, 4, RightFront, -30, 0.2);
+        //mecanum 0.3 tiles
+        encoderDrive(0.2, -4, 4, 4, LeftFront, 0, 0.2);
+        //lift to grab on stack of 5 at bottom of cone
+        //straight 1.6 tiles
         encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone grabbed
         //added to allow robot to lift the lift as to not tip stack.
+        //lift to top
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //back 2 tiles
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        //turn 45*
         encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone dropped
 
         //Second cone stacked, stacking third
+        //turn 45*
         encoderDrive(0.2, 4, -4, -4, LeftFront, -30, 0.2);
+        //lift to grab cone on stack of 4 at bottom of top cone
+        //straight 2 tiles
         encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone grabbed
         //added to allow robot to lift the lift as to not tip stack.
+        //max height
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //straight 2 tiles
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        //turn 45*
         encoderDrive(0.2, -4, 4, 4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
@@ -153,47 +172,69 @@ encoderDrive(0.2, -4, 4, -4, RightFront,30, 0.2);
 
         //parking based on April Tag detection.
         if(TagIdentified == "Left"){
-            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
-            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
+
+            // tuyrn 45*
+            encoderDrive(0.2, 4, -4, -4, LeftFront, 0.2);
         }
         if(TagIdentified == "Center"){
-            encoderDrive(0.2, 0, -4, -4, LeftFront, 0.2);
-            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
+            // tuyrn 45*
+            encoderDrive(0.2, 4, -4, -4, LeftFront, 0.2);
+            //straight one tile
+            encoderDrive(0.2, 1, 1, 1, LeftFront, 0.2);
         }
         if(TagIdentified == "Right"){
-            encoderDrive(0.2, -6, -6, -6, LeftFront, 0.2);
+            // tuyrn 45*
+            encoderDrive(0.2, 4, -4, -4, LeftFront, 0.2);
+            //straight 2 tiles
             encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
         }
 Left with lift
+//mecanum 0.3 tiles
+//lift up to max
 encoderDrive(0.2, -4, -4, 4, RightFront,30, 0.2);
+//straight 2.5 tiles
         encoderDrive(0.2, 10, 10, 10, RightFront, 0,0.2);
-        encoderDrive(0.2, 4, 0, 0, LeftFront, 0,0.2);
+        // 90* turn
+        encoderDrive(0.2, 4, -4, -4, LeftFront, 0,0.2);
         RightServo.setPosition(1);
         LeftServo.setPosition(1);
         //First cone stacked, going for second
-
+        //mecanum 0.3 tiles
+        encoderDrive(0.2, -4, -4, 4, RightFront, 0, 0.2);
+        //180* turn
+        //lift down to max
         encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
+        //straight 1.6 tiles
+        //lift to grab top cone of stack of 5
         encoderDrive(0.2, 8, 8, 8, LeftFront, 4, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone grabbed
         //added to allow robot to lift the lift as to not tip stack.
+        //for highest terminal
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //straight back 2 tiles
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        //turn 45*
         encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone dropped
 
         //Second cone stacked, stacking third
+        //turn 45*
         encoderDrive(0.2, -4, 4, 4, LeftFront, -30, 0.2);
+        //straight 2 tiles
         encoderDrive(0.2, 8, 8, 8, LeftFront, 3.6, 0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
         //cone grabbed
         //added to allow robot to lift the lift as to not tip stack.
+        //for highest terminal
         encoderDrive(0.2, 0, 0, 0, LeftFront, 30, 0.2);
+        //back 2 tiles
         encoderDrive(0.2, -8, -8, -8, LeftFront, 0, 0.2;
+        //turn 45 degrees
         encoderDrive(0.2, 4, -4, -4, LeftFront,  0.2);
         RightServo.setPosition(0.85);
         LeftServo.setPosition(0.85);
@@ -201,16 +242,21 @@ encoderDrive(0.2, -4, -4, 4, RightFront,30, 0.2);
 
         //parking based on April Tag detection.
         if(TagIdentified == "Left"){
-            encoderDrive(0.2, -4, -4, -4, RightFront,-30, 0.2);
-            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
+            //45* turn
+            encoderDrive(0.2, -4, 4, 4, LeftFront,-30, 0.2);
+            //straight 2 tiles
+            encoderDrive(0.2, 2, 2, 2, LeftFront, 0.2);
         }
         if(TagIdentified == "Center"){
-            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
-            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
+            //45* turn
+            encoderDrive(0.2, -1, 1, 1, LeftFront, 0.2);
+            //straight one tile
+            encoderDrive(0.2, 1, 1, 1, LeftFront, 0.2);
+
         }
         if(TagIdentified == "Right"){
-            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
-            encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
+            // 45 degrees
+            encoderDrive(0.2, -6, 6, 6, LeftFront, 0.2);
         }
 Unit Test
 //Testing Lift max height in program
