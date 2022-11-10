@@ -100,25 +100,17 @@ public class LeftAprilTagAuto extends LinearOpMode
         RightBack = hardwareMap.get(DcMotor.class, "RightBack");
         LeftFront  = hardwareMap.get(DcMotor.class, "LeftFront");
         RightFront = hardwareMap.get(DcMotor.class, "RightFront");
+        LeftBack = hardwareMap.get(DcMotor.class, "LeftBack");
         Lift = hardwareMap.get(DcMotor.class, "RightFront");
         RightServo = hardwareMap.get(Servo.class, "ClawRight");
         LeftServo = hardwareMap.get(Servo.class, "ClawLeft");
 
 
-        //Direction and Encoder Set
         RightFront.setDirection(DcMotor.Direction.REVERSE);
         LeftFront.setDirection(DcMotor.Direction.REVERSE);
         LeftBack.setDirection(DcMotor.Direction.REVERSE);
 
-        LeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        RightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        RightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //OpenCV Init
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -235,28 +227,31 @@ public class LeftAprilTagAuto extends LinearOpMode
             telemetry.update();
         }
 
-        /* Actually do something useful */
-        encoderDrive(0.2, -4, -4, 4, RightFront, 0.2);
-        Lift.setPower(0.3);
-        encoderDrive(0.2, 10, 10, 10, RightFront, 0.2);
-        encoderDrive(0.2, 4, 0, 0, LeftFront, 0.2);
-        RightServo.setPosition(1);
-        LeftServo.setPosition(1);
-        Lift.setPower(-0.2);
-        if(TagIdentified == "Left"){
-            encoderDrive(0.2, -4, -4, -4, RightFront, 0.2);
-            encoderDrive(0.2, -2, 0, 0, LeftFront, 0.2);
-        }
-        if(TagIdentified == "Center"){
-            encoderDrive(0.2, -4, 0, 0, LeftFront, 0.2);
-            encoderDrive(0.2, -1, -1, -1, LeftFront, 0.2);
-        }
-        if(TagIdentified == "Right"){
-            encoderDrive(0.2, -6, 0, 0, LeftFront, 0.2);
-            encoderDrive(0.2, 0, -2, -2, LeftFront, 0.2);
-        }
 
 
+
+        while(opModeIsActive()){
+            LeftBack.setPower(0.2);
+            RightBack.setPower(0.2);
+            RightFront.setPower(0.2);
+            LeftFront.setPower(0.2);
+            sleep(2000);
+            if(TagIdentified == Left){
+            LeftBack.setPower(0.2);
+            RightBack.setPower(-0.2);
+            RightFront.setPower(0.2);
+            LeftFront.setPower(-0.2);
+            }
+            if(Tagidentified == Right){
+            LeftBack.setPower(-0.2);
+            RightBack.setPower(0.2);
+            RightFront.setPower(-0.2);
+            LeftFront.setPower(0.2);
+            }
+            sleep(20000000);
+            }
+            
+          
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
         while (opModeIsActive()) {sleep(20);}
@@ -275,81 +270,6 @@ public class LeftAprilTagAuto extends LinearOpMode
 
 
 
-    public void encoderDrive(double speed,  double LeftFrontInches, double RightBackInches, double RightFrontInches, String LeftBackSet, double timeoutS) {
-        int newRightBackTarget;
-        int newLeftFrontTarget;
-        int newRightFrontTarget;
-        String LeftBackSet;
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newRightBackTarget = RightBack.getCurrentPosition() + (int)(RightBackInches * COUNTS_PER_INCH);
-            newLeftFrontTarget = LeftFront.getCurrentPosition() + (int)(LeftFrontInches * COUNTS_PER_INCH);
-            newRightFrontTarget = RightFront.getCurrentPosition() + (int)(RightFrontInches * COUNTS_PER_INCH);
-            RightBack.setTargetPosition(newRightBackTarget);
-            LeftFront.setTargetPosition(newLeftFrontTarget);
-            RightFront.setTargetPosition(newRightFrontTarget);
-
-            // Turn On RUN_TO_POSITION
-            RightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            //LeftBack is only ever paired with the front two motors, so we only need to check for positives and negatives for those two.
-            while(LeftBackSet.isBusy()) {
-                if (LeftBackSet == RightFront) {
-                    if (RightFrontInches > 0) {
-                        LeftBack.setPower(0.2);
-                    }
-                } else if(RightFrontInches < 0){
-                    LeftBack.setPower(-.2);
-
-                } else {
-                    LeftBack.setPower(0);
-                }
-
-                if (LeftBackSet == LeftFront) {
-                    if (LeftFrontInches > 0) {
-                        LeftBack.setPower(0.2);
-                    }
-                } else if (LeftFrontInches < 0) {
-                    LeftBack.setPower(-.2);
-
-                } else {
-                    LeftBack.setPower(0);
-                }
-            }
-
-            runtime.reset();
-            RightBack.setPower(Math.abs(speed));
-            LeftFront.setPower(Math.abs(speed));
-            RightFront.setPower(Math.abs(speed));
-
-            while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS) &&
-                    (LeftFront.isBusy() && LeftBack.isBusy())) {
-
-                // Display it for the driver.
-                telemetry.addData("Running to",  " %7d :%7d", newLeftBackTarget,  newRightBackTarget);
-                telemetry.addData("Currently at",  " at %7d :%7d",
-                        leftBack.getCurrentPosition(), LeftFront.getCurrentPosition());
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            LeftFront.setPower(0);
-            RightFront.setPower(0);
-            RightBack.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            sleep(250);   // optional pause after each move.
-
-
-        }
+    
     }
 }
